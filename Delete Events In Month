@@ -1,0 +1,33 @@
+Sub DeleteEventsInMonth()
+    Dim olApp As Object
+    Dim olCalFolder As Object
+    Dim olItems As Object
+    Dim i As Long
+    Dim month As Integer
+    Dim year As Integer
+    Dim startDate As Date
+    Dim endDate As Date
+    
+    ' Get the month and year from the worksheet
+    month = Worksheets("Audio Out-House").Range("R11").Value
+    year = Worksheets("Audio Out-House").Range("R9").Value
+    
+    ' Set the start and end dates for the selected month
+    startDate = DateSerial(year, month, 1)
+    endDate = DateSerial(year, month + 1, 1) - 1
+    
+    ' Get the Outlook calendar folder
+    Set olApp = CreateObject("Outlook.Application")
+    Set olCalFolder = olApp.Session.GetDefaultFolder(9).Folders("Outsource Audio")
+    
+    ' Use Restrict method to only retrieve calendar items within the selected month and year
+    Set olItems = olCalFolder.Items.Restrict("[Start] >= '" & startDate & "' AND [End] <= '" & endDate & "'")
+    
+    ' Loop through each event in the calendar folder and delete it
+    For i = olItems.Count To 1 Step -1
+        olItems.Item(i).Delete
+    Next i
+    
+    ' Display a message box to indicate that the events were deleted successfully
+    MsgBox "Done"
+End Sub
