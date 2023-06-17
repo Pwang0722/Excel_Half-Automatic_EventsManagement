@@ -1,0 +1,39 @@
+Sub UpdateOusourceAudioCalendar()
+    Dim olApp As Outlook.Application
+    Dim olApt As Outlook.AppointmentItem
+    Dim olCalFolder As Outlook.MAPIFolder
+    Dim i As Long
+
+    Set olApp = CreateObject("Outlook.Application")
+    Set olCalFolder = olApp.Session.GetDefaultFolder(olFolderCalendar).Folders("Outsource Audio")
+
+    ' Loop through all rows in range K4:O35
+    For i = 4 To 35
+        If Sheets("Audio Out-House").Range("K" & i).Value <> "" Then ' Check if row has a title
+
+            ' Create new appointment item
+            Set olApt = olCalFolder.Items.Add(olAppointmentItem)
+
+            ' Set appointment properties
+            olApt.Subject = Sheets("Audio Out-House").Range("K" & i).Value ' Title
+            olApt.location = Sheets("Audio Out-House").Range("N" & i).Value ' Location
+            olApt.Categories = Sheets("Audio Out-House").Range("O" & i).Value ' Color Category
+            olApt.Body = "" ' Body
+
+            ' Set start and end date/time
+            If IsDate(Sheets("Audio Out-House").Range("L" & i).Value) And IsDate(Sheets("Audio Out-House").Range("M" & i).Value) Then
+                olApt.Start = Sheets("Audio Out-House").Range("L" & i).Value
+                olApt.End = Sheets("Audio Out-House").Range("M" & i).Value
+            End If
+
+            ' Save appointment
+            olApt.Save
+        End If
+    Next i
+
+    ' Clean up
+    Set olApt = Nothing
+    Set olCalFolder = Nothing
+    Set olApp = Nothing
+    MsgBox "Done"
+End Sub
