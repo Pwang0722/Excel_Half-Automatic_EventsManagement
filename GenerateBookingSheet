@@ -1,0 +1,14 @@
+Sub GenerateBookingSheet()
+    NewSheet = Range("B1").Text & " " & Range("AM1")
+    Sheets("TEMPLATE_ALL").Copy Before:=Sheets(2)
+    ActiveSheet.Name = NewSheet
+    ActiveSheet.Select
+    Range("B1:AJ79").Select
+    Selection.Copy
+    Range("B1:AJ79").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Columns("AL:AV").Hidden = True
+    Range("B1").Select
+    MsgBox "Done"
+End Sub
