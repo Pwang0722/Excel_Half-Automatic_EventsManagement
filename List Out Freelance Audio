@@ -20,7 +20,7 @@ Sub ListOutFreelanceAudio()
     Dim facilityValue As String
     Dim timeValue As Date
     Dim durationValue As String
-    Dim dueDateValue As Date
+    Dim dueDateValue As Variant
     
     Dim rangeList() As String
     rangeList = Split("B8:H13,I8:O13,P8:V13,W8:AC13,AD8:AJ13,B20:H25,I20:O25,P20:V25,W20:AC25,AD20:AJ25,B32:H37,I32:O37,P32:V37,W32:AC37,AD32:AJ37,B44:H49,I44:O49,P44:V49,W44:AC49,AD44:AJ49,B56:H61,I56:O61,P56:V61,W56:AC61,AD56:AJ61,B68:H73,I68:O73,P68:V73,W68:AC73,AD68:AJ73", ",")
