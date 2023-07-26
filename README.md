@@ -12,7 +12,7 @@ A spreadsheet with a customized perpetual calendar that allows team members to m
 
 ---
 
-### Ｍethod 
+### Sheet Protection 
 - To avoid accidentally modifying the template worksheets, they will be protected with a password every time the workbook is opened or closed.
   
 Macro example for protecting sheets:
@@ -80,6 +80,16 @@ End Sub
 Function IsInArray(val As Variant, arr As Variant) As Boolean
     IsInArray = (UBound(Filter(arr, val)) > -1)
 End Function
+  ```
+---
+
+### Perpetual Calendar
+- Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
+- Designed with 6 weeks from Monday to Friday by using DATE and WEEKDAY functions to generate the dates based on Year and Month input in cells AN2 & AN5.
+  
+Formula example in cell H8:
+  ```bash
+=DATE(AN2,AN5,1)-WEEKDAY(DATE(AN2,AN5,1),2)+1
   ```
 
 ---
