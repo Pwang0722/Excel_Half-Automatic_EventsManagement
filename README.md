@@ -15,7 +15,7 @@ A spreadsheet with a customized perpetual calendar that allows team members to m
 ### Ｍethod 
 - To avoid accidentally modifying the template worksheets, they will be protected with a password every time the workbook is opened or closed.
   
-Formula example:
+Macro example for protecting sheets:
   ```bash
 Private Sub Workbook_Open()
     ProtectSheets
