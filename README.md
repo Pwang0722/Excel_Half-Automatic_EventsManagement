@@ -116,10 +116,15 @@ Formula example for holidays (B8):
 =IFERROR(VLOOKUP($H$20,HOLIDAYS!$B$2:$D$22,3,FALSE),"")
   ```
 - Use Conditional Formatting with a formula to format cells' color in grey for those dates that don't belong to the selected month.
+- And formatting cells' color in magenta for holidays by using the MATCH function to match the data in sheet 'HOLIDAYS'.
 
-Formula example for Conditional Formatting wtih MONTH function:
+Formula example for Conditional Formatting for dates:
   ```bash
 =MONTH($H$8)<>$AN$5
  ```
-- Holidays are formatted in magenta with a formula to format cells' color in magenta for those dates that don't belong to the selected month.
+Formula example for Conditional Formatting for holidays:
+  ```bash
+=MATCH($H$8,HOLIDAYS!$B$2:$B$22,0)
+ ```
+
 ---
