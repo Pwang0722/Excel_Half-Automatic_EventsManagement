@@ -14,8 +14,8 @@ A spreadsheet with a customized perpetual calendar that allows team members to m
 ### Notice
 - The spreadsheet was created using Excel version 2306 on Windows 11. It may encounter unexpected errors while running VBA macros on a MAC.
 - Before testing out the spreadsheet, make sure to enable VBA macros and check the Outlook reference.
-  Enable Macros: In Excel, go to File > Options > Trust Center > Trust Center Settings. Under the Macro Settings tab, select "Enable all macros" or "Enable all macros with notification" to allow the code to run.
-  Check References: In the VBA editor, go to Tools > References and ensure that the necessary Outlook reference is selected. Look for the reference starting with "Microsoft Outlook Object Library" and make sure it is checked.
+  - Enable Macros: In Excel, go to File > Options > Trust Center > Trust Center Settings. Under the Macro Settings tab, select "Enable all macros" or "Enable all macros with notification" to allow the code to run.
+  - Check References: In the VBA editor, go to Tools > References and ensure that the necessary Outlook reference is selected. Look for the reference starting with "Microsoft Outlook Object Library" and make sure it is checked.
   
 ---
 ### Sheet Protection 
