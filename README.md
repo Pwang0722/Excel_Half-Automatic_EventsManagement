@@ -85,11 +85,15 @@ End Function
 
 ### Perpetual Calendar
 - Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
-- Designed with 6 weeks from Monday to Friday by using DATE and WEEKDAY functions to generate the dates based on Year and Month input in cells AN2 & AN5.
+- Design with 6 weeks from Monday to Friday by using DATE and WEEKDAY functions to generate the dates based on Year and Month input in cells AN2 & AN5.
   
 Formula example in cell H8:
   ```bash
 =DATE(AN2,AN5,1)-WEEKDAY(DATE(AN2,AN5,1),2)+1
   ```
+- Use Conditional Formatting with a formula to format cells' color in grey for those dates that don't belong to the selected month.
 
+Formula example for Conditional Formatting wtih MONTH function:
+  ```bash
+=MONTH($H$8)<>$AN$5
 ---
