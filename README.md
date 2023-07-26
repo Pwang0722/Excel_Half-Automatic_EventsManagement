@@ -104,11 +104,16 @@ Sub GenerateBookingSheet()
     MsgBox "Done"
 End Sub
   ```
-- Design with 6 weeks from Monday to Friday by using DATE and WEEKDAY functions to generate the dates based on Year and Month input in cells AN2 & AN5.
+- Calendar is designed with 6 weeks from Monday to Friday, using DATE and WEEKDAY functions to generate the dates based on the Year and Month input in cells AN2 & AN5.
+- Names of holidays are generated using the VLOOKUP function to lookup the data in sheet 'HOLIDAYS'.
   
-Formula example in cell H8:
+Formula example for dates (H8):
   ```bash
 =DATE(AN2,AN5,1)-WEEKDAY(DATE(AN2,AN5,1),2)+1
+  ```
+Formula example for holidays (B8):
+  ```bash
+=IFERROR(VLOOKUP($H$20,HOLIDAYS!$B$2:$D$22,3,FALSE),"")
   ```
 - Use Conditional Formatting with a formula to format cells' color in grey for those dates that don't belong to the selected month.
 
@@ -116,4 +121,5 @@ Formula example for Conditional Formatting wtih MONTH function:
   ```bash
 =MONTH($H$8)<>$AN$5
  ```
+- Holidays are formatted in magenta with a formula to format cells' color in magenta for those dates that don't belong to the selected month.
 ---
