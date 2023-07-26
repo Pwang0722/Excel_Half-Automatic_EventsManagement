@@ -85,6 +85,25 @@ End Function
 
 ### Perpetual Calendar
 - Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
+- Generate a clean monthly calendar by select desired Year and Month in cells AN2 & AN5.
+
+Macro example for generating calendar:
+  ```bash
+Sub GenerateBookingSheet()
+    NewSheet = Range("B1").Text & " " & Range("AM1")
+    Sheets("TEMPLATE_ALL").Copy Before:=Sheets(2)
+    ActiveSheet.Name = NewSheet
+    ActiveSheet.Select
+    Range("B1:AJ79").Select
+    Selection.Copy
+    Range("B1:AJ79").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Columns("AL:AV").Hidden = True
+    Range("B1").Select
+    MsgBox "Done"
+End Sub
+  ```
 - Design with 6 weeks from Monday to Friday by using DATE and WEEKDAY functions to generate the dates based on Year and Month input in cells AN2 & AN5.
   
 Formula example in cell H8:
