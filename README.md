@@ -9,9 +9,13 @@
 ### Outline
 A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA Macros to efficiently achieve the desired objectives. And created Formulas and VBA Macros with the help of ChatGPT
 
-
 ---
 
+### Notice
+- The spreadsheet was created using Excel version 2306 on Windows 11. It may encounter unexpected errors while running VBA macros on a MAC.
+- 
+
+---
 ### Sheet Protection 
 - To avoid accidentally modifying the template worksheets, they will be protected with a password every time the workbook is opened or closed.
   
