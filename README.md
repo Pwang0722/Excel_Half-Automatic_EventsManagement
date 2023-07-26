@@ -1,4 +1,4 @@
-<h2 align="center">Excel: Scheduled Booking Management with VBA Macros and Formulas</h1>
+<h2 align="center">Excel: Scheduled Booking Management with VBA macros and Formulas</h1>
 </div>
 
 ### Spreadsheet Example
@@ -7,14 +7,16 @@
 ---
 
 ### Outline
-A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA Macros to efficiently achieve the desired objectives. And created Formulas and VBA Macros with the help of ChatGPT
+A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA macros to efficiently achieve the desired objectives. And created Formulas and VBA macros with the help of ChatGPT
 
 ---
 
 ### Notice
 - The spreadsheet was created using Excel version 2306 on Windows 11. It may encounter unexpected errors while running VBA macros on a MAC.
-- 
-
+- Before testing out the spreadsheet, make sure to enable VBA macros and check the Outlook reference.
+  Enable Macros: In Excel, go to File > Options > Trust Center > Trust Center Settings. Under the Macro Settings tab, select "Enable all macros" or "Enable all macros with notification" to allow the code to run.
+  Check References: In the VBA editor, go to Tools > References and ensure that the necessary Outlook reference is selected. Look for the reference starting with "Microsoft Outlook Object Library" and make sure it is checked.
+  
 ---
 ### Sheet Protection 
 - To avoid accidentally modifying the template worksheets, they will be protected with a password every time the workbook is opened or closed.
@@ -87,7 +89,7 @@ End Function
   ```
 ---
 
-### Perpetual Calendar
+### Perpetual Calendar_sheet 'TEMPLATE_ALL'
 - Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
 - Generate a clean monthly calendar by select desired Year and Month in cells AN2 & AN5.
 
