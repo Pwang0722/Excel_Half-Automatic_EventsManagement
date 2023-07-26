@@ -7,8 +7,7 @@
 ---
 
 ### Outline
-A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar.
-It involves utilizing multiple Functions, Conditional Formatting, and VBA Macros to efficiently achieve the desired objectives.
+A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA Macros to efficiently achieve the desired objectives with the help of ChatGPT.
 
 ---
 
