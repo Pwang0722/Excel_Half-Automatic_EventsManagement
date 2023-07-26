@@ -24,11 +24,11 @@ Macro example for protecting sheets:
 Private Sub Workbook_Open()
     ProtectSheets
 End Sub
-
+---
 Private Sub Workbook_BeforeClose(Cancel As Boolean)
     ProtectSheets
 End Sub
-
+---
 Private Sub Workbook_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
     Dim protectedSheets As Variant
     Dim ws As Worksheet
@@ -61,7 +61,7 @@ Private Sub Workbook_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Ra
         End If
     End If
 End Sub
-
+---
 Private Sub ProtectSheets()
     Dim protectedSheets As Variant
     Dim ws As Worksheet
@@ -80,7 +80,7 @@ Private Sub ProtectSheets()
         End If
     Next sheetName
 End Sub
-
+---
 Function IsInArray(val As Variant, arr As Variant) As Boolean
     IsInArray = (UBound(Filter(arr, val)) > -1)
 End Function
