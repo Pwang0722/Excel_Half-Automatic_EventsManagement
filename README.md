@@ -13,10 +13,73 @@ A spreadsheet with a customized perpetual calendar that allows team members to m
 ---
 
 ### Ｍethod 
-- To Avoid
+- To avoid accidentally modifying the template worksheets, they will be protected with a password every time the workbook is opened or closed.
+  
 Formula example:
   ```bash
- =IFERROR(FILTER('TITLE LIST'!A:N,('TITLE LIST'!N:N="AENG FMALLN")+('TITLE LIST'!N:N="GMAND FMALLN")+('TITLE LIST'!N:N="OMAND FMALLN")+('TITLE LIST'!N:N="OBM FMALLN")+('TITLE LIST'!N:N="ASOT ONLYALLN")+('TITLE LIST'!N:N="GSOT ONLYALLN")+('TITLE LIST'!N:N="OSOT ONLYALLN")+('TITLE LIST'!N:N="AENG FM05BN")+('TITLE LIST'!N:N="GMAND FM05BN")+('TITLE LIST'!N:N="OMAND FM05BN")+('TITLE LIST'!N:N="OBM FM05BN")+('TITLE LIST'!N:N="ASOT ONLY05BN")+('TITLE LIST'!N:N="GSOT ONLY05BN")+('TITLE LIST'!N:N="OSOT ONLY05BN")+('TITLE LIST'!N:N="GMAND FMALLY")+('TITLE LIST'!N:N="GSOT ONLYALLY")+('TITLE LIST'!N:N="GMAND FM05BY")+('TITLE LIST'!N:N="GSOT ONLY05BY")),"")
+Private Sub Workbook_Open()
+    ProtectSheets
+End Sub
+
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+    ProtectSheets
+End Sub
+
+Private Sub Workbook_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
+    Dim protectedSheets As Variant
+    Dim ws As Worksheet
+    Dim password As String
+    
+    ' List of sheets to protect
+    protectedSheets = Array("TEMPLATE_ALL", "Audio Out-House", "Summary", "HOLIDAYS")
+    
+    ' Check if the changed sheet is one of the protected sheets
+    On Error Resume Next
+    Set ws = ThisWorkbook.Sheets(Target.Worksheet.Name)
+    On Error GoTo 0
+    
+    If Not ws Is Nothing And IsInArray(ws.Name, protectedSheets) Then
+        ' Check if the sheet is protected
+        If ws.ProtectContents Then
+            ' Prompt the user to enter the password to unprotect the sheet
+            password = InputBox("Enter the password to unprotect the sheet:", "Password")
+            
+            ' Check if the entered password matches the preset password
+            If password = "1234" Then
+                ' Unprotect the sheet to allow editing
+                ws.Unprotect password:="1234"
+            Else
+                MsgBox "Incorrect password. The sheet will remain protected.", vbExclamation
+                Application.EnableEvents = False
+                Target.Offset(1, 0).Select ' Move to the next cell to avoid an infinite loop
+                Application.EnableEvents = True
+            End If
+        End If
+    End If
+End Sub
+
+Private Sub ProtectSheets()
+    Dim protectedSheets As Variant
+    Dim ws As Worksheet
+    
+    ' List of sheets to protect
+    protectedSheets = Array("TEMPLATE_ALL", "Audio Out-House", "Summary", "HOLIDAYS")
+    
+    ' Loop through each protected sheet and protect with the preset password
+    For Each sheetName In protectedSheets
+        On Error Resume Next
+        Set ws = ThisWorkbook.Sheets(sheetName)
+        On Error GoTo 0
+        
+        If Not ws Is Nothing Then
+            ws.Protect password:="1234", UserInterfaceOnly:=True
+        End If
+    Next sheetName
+End Sub
+
+Function IsInArray(val As Variant, arr As Variant) As Boolean
+    IsInArray = (UBound(Filter(arr, val)) > -1)
+End Function
   ```
 
 ---
