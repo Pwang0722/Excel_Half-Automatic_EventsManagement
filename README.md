@@ -89,7 +89,7 @@ End Function
   ```
 ---
 
-### Perpetual Calendar_sheet 'TEMPLATE_ALL'
+### Perpetual Calendar_sheets 'TEMPLATE_ALL' & 'HOLIDAYS'
 - Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
 - Generate a clean monthly calendar by select desired Year and Month in cells AN2 & AN5.
 
