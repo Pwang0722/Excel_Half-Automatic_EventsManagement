@@ -2,7 +2,7 @@
 </div>
 
 ### Spreadsheet Example
-- [Booking Sheet.xlsm (password:1234)](https://github.com/Pwang0722/Excel_PerpetualCalendar_OutlookCalendar/raw/main/Booking%20Sheet%20Template.xlsm)
+- [Booking Sheet (password:1234).xlsm](https://github.com/Pwang0722/Excel_PerpetualCalendar_OutlookCalendar/raw/main/Booking%20Sheet%20Template.xlsm)
 
 ---
 
