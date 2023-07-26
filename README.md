@@ -96,4 +96,5 @@ Formula example in cell H8:
 Formula example for Conditional Formatting wtih MONTH function:
   ```bash
 =MONTH($H$8)<>$AN$5
+ ```
 ---
