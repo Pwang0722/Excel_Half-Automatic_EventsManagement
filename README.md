@@ -1,4 +1,4 @@
-<h2 align="center">Excel: Events Schedules Management with VBA macros and Formulas</h1>
+<h2 align="center">Excel: Events Schedule Management with VBA macros and Formulas</h1>
 </div>
 
 ### Spreadsheet Example
@@ -7,7 +7,7 @@
 ---
 
 ### Outline
-A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings as events to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA macros to efficiently achieve the desired objectives. And created Formulas and VBA macros with the help of ChatGPT
+A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings as events to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA macros to efficiently achieve the desired objectives. Created Formulas and VBA macros are with the help of ChatGPT.
 
 ---
 
@@ -90,8 +90,8 @@ End Function
 ---
 
 ### Perpetual Calendar_sheets 'TEMPLATE_ALL' & 'HOLIDAYS'
-- Sheet 'TEMPLATE_ALL' is a booking sheet contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
-- Generate a clean monthly calendar by select desired Year and Month in cells AN2 & AN5.
+- The 'TEMPLATE_ALL' sheet is a booking sheet contains a perpetual calendar which can generate a clean monthly calendar for team members to make bookings for their projects.
+- Generate a clean monthly calendar by selecting desired Year and Month in cells AN2 & AN5.
 
 Macro example for generating calendar:
   ```bash
@@ -122,7 +122,7 @@ Formula example for holidays (B8):
 =IFERROR(VLOOKUP($H$20,HOLIDAYS!$B$2:$D$22,3,FALSE),"")
   ```
 - Use Conditional Formatting with a formula to format cells' color in grey for those dates that don't belong to the selected month.
-- And formatting cells' color in magenta for holidays by using the MATCH function to match the data in sheet 'HOLIDAYS'.
+- And formatting cells' color in magenta for holidays by using the MATCH function to match the data in the 'HOLIDAYS' sheet.
 
 Formula example for Conditional Formatting for dates:
   ```bash
@@ -205,9 +205,9 @@ Sub ListOutFreelanceAudio()
 End Sub
 ```
 - The data from table B4:I35 will be automatically reformatted into Outlook acceptable format for events and placed in table K4:O35 using multiple formulas.
-- The events listed in table K4:O35 could be uploaded to 'Outsource Audio' calendar in Outlook.
+- The events listed in table K4:O35 can be uploaded to 'Outsource Audio' calendar in Outlook.
 
-Macro example for updating events to Outlook Calendar :
+Macro example for updating events to Outlook Calendar:
   ```bash
 Sub UpdateOusourceAudioCalendar()
     Dim olApp As Outlook.Application
@@ -251,7 +251,7 @@ End Sub
 ```
 - The events in 'Outsource Audio' calendar also can be deleted by selecting desired Year and Month in cells R9 & R11.
 
-Macro example for deleting events in Outlook Calendar.:
+Macro example for deleting events in Outlook Calendar:
   ```bash
 Sub DeleteEventsInMonth()
     Dim olApp As Object
@@ -290,7 +290,7 @@ End Sub
 ---
 
 ### Export Outlook Calendar events to spreadsheet_Sheet 'Summary'
-- Export events from the 'Outsource Audio' calendar by selecting the Year and Month in cells C2 and C3 to the table in cells E3:J30 on the 'Summary' sheet.
+- Export events from the 'Outsource Audio' calendar by selecting the Year and Month in cells C2 and C3 to the table E3:J30 in the 'Summary' sheet.
 
 Macro example for exporting events to spreadsheet:
   ```bash
