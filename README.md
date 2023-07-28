@@ -287,6 +287,8 @@ Sub DeleteEventsInMonth()
     MsgBox "Done"
 End Sub
 ```
+---
+
 ### Export Outlook Calendar events to spreadsheet_Sheet 'Summary'
 - Export events from the 'Outsource Audio' calendar by selecting the Year and Month in cells C2 and C3 to the table in cells E3:J30 on the 'Summary' sheet.
 
