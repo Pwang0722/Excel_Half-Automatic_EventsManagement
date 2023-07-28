@@ -1,4 +1,4 @@
-<h2 align="center">Excel: Scheduled Booking Management with VBA macros and Formulas</h1>
+<h2 align="center">Excel: Events Schedules Management with VBA macros and Formulas</h1>
 </div>
 
 ### Spreadsheet Example
@@ -135,7 +135,7 @@ Formula example for Conditional Formatting for holidays:
 
 ---
 
-### Update schedules to Outlook Calendar_Sheet 'Audio Out-House'
+### Update events to Outlook Calendar_Sheet 'Audio Out-House'
 - List all Freelance Audio items in the 'TEMPLATE_ALL' sheet under the FACILITY column in columns E, L, S, Z, and AG, and place the data in the 'Audio Out-House' sheet table B4:I35.
 
 Macro example for listing out the data:
