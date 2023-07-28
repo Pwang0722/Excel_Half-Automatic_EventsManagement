@@ -136,7 +136,7 @@ Formula example for Conditional Formatting for holidays:
 ---
 
 ### Update schedules to Outlook Calendar_Sheet 'Audio Out-House'
-- List all Freelance Audio bookings in the 'TEMPLATE_ALL' sheet under the FACILITY column in columns E, L, S, Z, and AG, and place the data in the 'Audio Out-House' sheet table B4:I35.
+- List all Freelance Audio items in the 'TEMPLATE_ALL' sheet under the FACILITY column in columns E, L, S, Z, and AG, and place the data in the 'Audio Out-House' sheet table B4:I35.
 
 Macro example for listing out the data:
   ```bash
@@ -204,4 +204,50 @@ Sub ListOutFreelanceAudio()
 
 End Sub
 ```
+- The data from table B4:I35 will be automatically reformatted into Outlook acceptable format and placed in table K4:O35 using multiple formulas.
+- The schedules listed in table K4:O35 could be uploaded to the 'Outsource Audio' calendar in Outlook.
+
+Macro example for updating schedules to Outlook Canlendar :
+  ```bash
+Sub UpdateOusourceAudioCalendar()
+    Dim olApp As Outlook.Application
+    Dim olApt As Outlook.AppointmentItem
+    Dim olCalFolder As Outlook.MAPIFolder
+    Dim i As Long
+
+    Set olApp = CreateObject("Outlook.Application")
+    Set olCalFolder = olApp.Session.GetDefaultFolder(olFolderCalendar).Folders("Outsource Audio")
+
+    ' Loop through all rows in range K4:O35
+    For i = 4 To 35
+        If Sheets("Audio Out-House").Range("K" & i).Value <> "" Then ' Check if row has a title
+
+            ' Create new appointment item
+            Set olApt = olCalFolder.Items.Add(olAppointmentItem)
+
+            ' Set appointment properties
+            olApt.Subject = Sheets("Audio Out-House").Range("K" & i).Value ' Title
+            olApt.location = Sheets("Audio Out-House").Range("N" & i).Value ' Location
+            olApt.Categories = Sheets("Audio Out-House").Range("O" & i).Value ' Color Category
+            olApt.Body = "" ' Body
+
+            ' Set start and end date/time
+            If IsDate(Sheets("Audio Out-House").Range("L" & i).Value) And IsDate(Sheets("Audio Out-House").Range("M" & i).Value) Then
+                olApt.Start = Sheets("Audio Out-House").Range("L" & i).Value
+                olApt.End = Sheets("Audio Out-House").Range("M" & i).Value
+            End If
+
+            ' Save appointment
+            olApt.Save
+        End If
+    Next i
+
+    ' Clean up
+    Set olApt = Nothing
+    Set olCalFolder = Nothing
+    Set olApp = Nothing
+    MsgBox "Done"
+End Sub
+```
+
 ---
