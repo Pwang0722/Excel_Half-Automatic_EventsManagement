@@ -7,7 +7,7 @@
 ---
 
 ### Outline
-A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA macros to efficiently achieve the desired objectives. And created Formulas and VBA macros with the help of ChatGPT
+A spreadsheet with a customized perpetual calendar that allows team members to make bookings for their duties each month and update specific bookings as events to the Outlook Calendar. It involves utilizing multiple Functions, Conditional Formatting, and VBA macros to efficiently achieve the desired objectives. And created Formulas and VBA macros with the help of ChatGPT
 
 ---
 
@@ -204,10 +204,10 @@ Sub ListOutFreelanceAudio()
 
 End Sub
 ```
-- The data from table B4:I35 will be automatically reformatted into Outlook acceptable format and placed in table K4:O35 using multiple formulas.
-- The schedules listed in table K4:O35 could be uploaded to the 'Outsource Audio' calendar in Outlook.
+- The data from table B4:I35 will be automatically reformatted into Outlook acceptable format for events and placed in table K4:O35 using multiple formulas.
+- The events listed in table K4:O35 could be uploaded to 'Outsource Audio' calendar in Outlook.
 
-Macro example for updating schedules to Outlook Canlendar :
+Macro example for updating events to Outlook Canlendar :
   ```bash
 Sub UpdateOusourceAudioCalendar()
     Dim olApp As Outlook.Application
@@ -249,5 +249,44 @@ Sub UpdateOusourceAudioCalendar()
     MsgBox "Done"
 End Sub
 ```
+- The events in 'Outsource Audio' calendar also can be deleted by selecting desired Year and Month in cells R9 & R11.
+
+Macro example for deleting events in Outlook Calendar.:
+  ```bash
+Sub DeleteEventsInMonth()
+    Dim olApp As Object
+    Dim olCalFolder As Object
+    Dim olItems As Object
+    Dim i As Long
+    Dim month As Integer
+    Dim year As Integer
+    Dim startDate As Date
+    Dim endDate As Date
+    
+    ' Get the month and year from the worksheet
+    month = Worksheets("Audio Out-House").Range("R11").Value
+    year = Worksheets("Audio Out-House").Range("R9").Value
+    
+    ' Set the start and end dates for the selected month
+    startDate = DateSerial(year, month, 1)
+    endDate = DateSerial(year, month + 1, 1) - 1
+    
+    ' Get the Outlook calendar folder
+    Set olApp = CreateObject("Outlook.Application")
+    Set olCalFolder = olApp.Session.GetDefaultFolder(9).Folders("Outsource Audio")
+    
+    ' Use Restrict method to only retrieve calendar items within the selected month and year
+    Set olItems = olCalFolder.Items.Restrict("[Start] >= '" & startDate & "' AND [End] <= '" & endDate & "'")
+    
+    ' Loop through each event in the calendar folder and delete it
+    For i = olItems.Count To 1 Step -1
+        olItems.Item(i).Delete
+    Next i
+    
+    ' Display a message box to indicate that the events were deleted successfully
+    MsgBox "Done"
+End Sub
+```
+
 
 ---
