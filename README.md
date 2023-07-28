@@ -287,6 +287,7 @@ Sub DeleteEventsInMonth()
     MsgBox "Done"
 End Sub
 ```
-
+### Export Outlook Calendar events to worksheet_Sheet 'Summary'
+- Export selected Year and Month events in cells C2 & C3.
 
 ---
