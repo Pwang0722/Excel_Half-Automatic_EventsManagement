@@ -287,7 +287,73 @@ Sub DeleteEventsInMonth()
     MsgBox "Done"
 End Sub
 ```
-### Export Outlook Calendar events to worksheet_Sheet 'Summary'
-- Export selected Year and Month events in cells C2 & C3.
+### Export Outlook Calendar events to spreadsheet_Sheet 'Summary'
+- Export events from the 'Outsource Audio' calendar by selecting the Year and Month in cells C2 and C3 to the table in cells E3:J30 on the 'Summary' sheet.
+- 
+Macro example for exporting events to spreadsheet:
+  ```bash
+Sub ExportCalendarToExcel()
 
+    Range("E3:I30").Select
+    Selection.ClearContents
+    
+    Dim olApp As Outlook.Application
+    Dim olNS As Outlook.Namespace
+    Dim olCalFolder As Outlook.Folder
+    Dim olApt As Outlook.AppointmentItem
+    Dim i As Long
+    Dim startDate As Date, endDate As Date
+    
+    ' Set start and end date for filtering appointments
+    startDate = DateSerial(Sheets("Summary").Range("C2").Value, Sheets("Summary").Range("C3").Value, 1)
+    endDate = DateAdd("m", 1, startDate)
+    
+    ' Set Outlook application object
+    Set olApp = CreateObject("Outlook.Application")
+    Set olNS = olApp.GetNamespace("MAPI")
+    
+    ' Get Outsource Audio calendar folder
+    Set olCalFolder = olNS.GetDefaultFolder(olFolderCalendar).Folders("Outsource Audio")
+    
+    ' Create a dictionary object to store appointment data
+    Dim dict As Object
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    ' Loop through all appointments in the calendar folder
+    For Each olApt In olCalFolder.Items
+        If olApt.Start >= startDate And olApt.Start < endDate Then ' Check if appointment is in specified month
+            
+            ' Add appointment data to dictionary
+            If Not dict.Exists(olApt.location) Then
+                dict.Add olApt.location, New Collection
+            End If
+            dict(olApt.location).Add olApt.Start & "," & Format(olApt.Start, "hh:mm AM/PM") & "," & Format(olApt.End, "hh:mm AM/PM") & "," & olApt.Subject
+            
+        End If
+    Next olApt
+    
+    ' Add appointment data to Excel sheet sorted by location
+    With Sheets("Summary")
+        i = 3 ' Start from row 3
+        For Each Key In dict.keys
+            For Each Item In dict(Key)
+                .Range("E" & i).Value = CDate(Split(Item, ",")(0)) ' Start date
+                .Range("F" & i).Value = Split(Item, ",")(1) ' Start time
+                .Range("G" & i).Value = Split(Item, ",")(2) ' End time
+                .Range("H" & i).Value = Split(Item, ",")(3) ' Title
+                .Range("I" & i).Value = Replace(Key, "Audio Outsource ", "") ' Location
+                i = i + 1
+            Next Item
+        Next Key
+    End With
+    
+    ' Clean up
+    Set olApt = Nothing
+    Set olCalFolder = Nothing
+    Set olNS = Nothing
+    Set olApp = Nothing
+    Set dict = Nothing
+    
+End Sub
+```
 ---
