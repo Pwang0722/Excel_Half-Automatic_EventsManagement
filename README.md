@@ -90,7 +90,7 @@ End Function
 ---
 
 ### Perpetual Calendar_sheets 'TEMPLATE_ALL' & 'HOLIDAYS'
-- Sheet 'TEMPLATE_ALL' contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
+- Sheet 'TEMPLATE_ALL' is a booking sheet contains a perpetual calendar which could generate a clean monthly calendar for team members to make bookings for their projects.
 - Generate a clean monthly calendar by select desired Year and Month in cells AN2 & AN5.
 
 Macro example for generating calendar:
@@ -133,4 +133,75 @@ Formula example for Conditional Formatting for holidays:
 =MATCH($H$8,HOLIDAYS!$B$2:$B$22,0)
  ```
 
+---
+
+### Update schedules to Outlook Calendar_Sheet 'Audio Out-House'
+- List all Freelance Audio bookings in the 'TEMPLATE_ALL' sheet under the FACILITY column in columns E, L, S, Z, and AG, and place the data in the 'Audio Out-House' sheet table B4:I35.
+
+Macro example for listing out the data:
+  ```bash
+Sub ListOutFreelanceAudio()
+
+    Range("B4:I35").Select
+    Selection.ClearContents
+    Range("A4:A35").EntireRow.AutoFit
+    
+    Dim sourceSheet As Worksheet
+    Set sourceSheet = ThisWorkbook.Sheets(2)
+    
+    Dim destSheet As Worksheet
+    Set destSheet = ThisWorkbook.Sheets("Audio Out-House")
+    
+    Dim rowCounter As Long
+    rowCounter = 4
+    
+    Dim dateValue As Date
+    Dim producerValue As String
+    Dim channelValue As String
+    Dim projectValue As String
+    Dim facilityValue As String
+    Dim timeValue As Date
+    Dim durationValue As String
+    Dim dueDateValue As Date
+    
+    Dim rangeList() As String
+    rangeList = Split("B8:H13,I8:O13,P8:V13,W8:AC13,AD8:AJ13,B20:H25,I20:O25,P20:V25,W20:AC25,AD20:AJ25,B32:H37,I32:O37,P32:V37,W32:AC37,AD32:AJ37,B44:H49,I44:O49,P44:V49,W44:AC49,AD44:AJ49,B56:H61,I56:O61,P56:V61,W56:AC61,AD56:AJ61,B68:H73,I68:O73,P68:V73,W68:AC73,AD68:AJ73", ",")
+    
+    Dim rangeObj As Range
+    
+    For Each rangeStr In rangeList
+        
+        Set rangeObj = sourceSheet.Range(rangeStr)
+        dateValue = rangeObj.Cells(1, rangeObj.Columns.Count).Value
+        
+        For j = 0 To 4
+            
+            producerValue = rangeObj.Cells(2 + j, 1).Value
+            channelValue = rangeObj.Cells(2 + j, 2).Value
+            projectValue = rangeObj.Cells(2 + j, 3).Value
+            facilityValue = rangeObj.Cells(2 + j, 4).Value
+            textValue = rangeObj.Cells(2 + j, 5).Value
+            durationValue = rangeObj.Cells(2 + j, 6).Value
+            dueDateValue = rangeObj.Cells(2 + j, rangeObj.Columns.Count).Value
+            
+            If facilityValue = "Freelance Audio" Then
+                destSheet.Cells(rowCounter, 2).Value = dateValue
+                destSheet.Cells(rowCounter, 3).Value = producerValue
+                destSheet.Cells(rowCounter, 4).Value = channelValue
+                destSheet.Cells(rowCounter, 5).Value = projectValue
+                destSheet.Cells(rowCounter, 6).Value = facilityValue
+                destSheet.Cells(rowCounter, 7).Value = textValue
+                destSheet.Cells(rowCounter, 8).Value = durationValue
+                destSheet.Cells(rowCounter, 9).Value = dueDateValue
+                rowCounter = rowCounter + 1
+            End If
+            
+        Next j
+        
+    Next rangeStr
+    destSheet.Range("B4:I" & rowCounter - 1).Sort key1:=destSheet.Range("I4:I" & rowCounter - 1), _
+                                                    order1:=xlAscending, Header:=xlNo
+
+End Sub
+```
 ---
