@@ -207,7 +207,7 @@ End Sub
 - The data from table B4:I35 will be automatically reformatted into Outlook acceptable format for events and placed in table K4:O35 using multiple formulas.
 - The events listed in table K4:O35 could be uploaded to 'Outsource Audio' calendar in Outlook.
 
-Macro example for updating events to Outlook Canlendar :
+Macro example for updating events to Outlook Calendar :
   ```bash
 Sub UpdateOusourceAudioCalendar()
     Dim olApp As Outlook.Application
